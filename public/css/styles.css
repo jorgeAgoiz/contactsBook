@@ -1,0 +1,28 @@
+body {
+    background-image: url("https://www.wallpapertip.com/wmimgs/21-211135_gta-5-los-santos-background.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.navBar {
+    background-color: rgba(172, 241, 241, 0.6);
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.linkText {
+    font-family: 'Anton', sans-serif;
+    font-size: calc(1.5em + 1vw);
+    color: black;
+}
+
+.titleApp {
+    height: 500px;
+}
+
+.textH1 {
+    color: rgb(255, 236, 208);
+    font-family: 'Anton', sans-serif;
+    font-size: calc(4em + 3vw);
+    -webkit-text-stroke: 2px black;
+}
