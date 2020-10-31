@@ -4,6 +4,8 @@ body {
     background-attachment: fixed;
 }
 
+/* MAIN PAGE */
+
 .navBar {
     background-color: rgba(172, 241, 241, 0.6);
     padding-top: 1em;
@@ -25,4 +27,12 @@ body {
     font-family: 'Anton', sans-serif;
     font-size: calc(4em + 3vw);
     -webkit-text-stroke: 2px black;
+}
+
+/* SIGN IN PAGE */
+
+.labelForm {
+    font-family: 'Bree Serif', serif;
+    font-size: calc(1em + 1vw);
+    color: black;
 }
