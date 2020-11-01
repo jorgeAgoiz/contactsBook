@@ -11,11 +11,11 @@ router.get('/signup', (req, res, next) => {
 });
 // '/signup' => POST
 router.post('/signup', [
-    body('inputUser')
+    body('inputUser', 'Invalid user name.')
         .trim(),
-    body('password1')
+    body('password1', 'Invalid password motherfucker.')
         .isLength({min: 5, max: 12}),
-    body('password2')
+    body('password2', 'Invalid password.')
         .isLength({min: 5, max: 12})
     ], (req, res) => {
 
