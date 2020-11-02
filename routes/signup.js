@@ -3,6 +3,7 @@ const path = require('path');
 const express = require('express');
 const router = express.Router();
 const rootDir = require('../util/path');
+const User = require('../repositories/user');//Import the user repository
 const { body, validationResult } = require('express-validator');
 
 // '/signup' => GET
@@ -26,14 +27,19 @@ router.post('/signup', [
     ], (req, res) => {
 
         const errors = validationResult(req);
-            if (!errors.isEmpty()) {
-                //return res.status(400).json({ errors: errors.array() });
-                console.log(errors);
-            }else{
-                console.log(req.body); 
-            }
-            
-    
+        if (!errors.isEmpty()) {
+            //return res.status(400).json({ errors: errors.array() });
+            console.log(errors);
+        }else{
+            console.log(req.body); 
+        }
+        
+        // USERS REPOSITORY
+        const user1 = new User(req.body.inputUser, req.body.password1);
+        user1.save();
+        user1.fetchAllUsers();   
+        // USERS REPOSITORY
+
 });
 
 module.exports = { 
