@@ -11,19 +11,28 @@ router.get('/signup', (req, res, next) => {
 });
 // '/signup' => POST
 router.post('/signup', [
-    body('inputUser', 'Invalid user name.')
-        .trim(),
-    body('password1', 'Invalid password motherfucker.')
-        .isLength({min: 5, max: 12}),
-    body('password2', 'Invalid password.')
-        .isLength({min: 5, max: 12})
+    body('inputUser')
+        .trim()
+        .notEmpty()
+        .withMessage('Must be a valid user'),
+    body('password1')
+        .trim()
+        .isLength({min: 5, max: 20})
+        .withMessage('Must be between 5 and 20 characters'),
+    body('password2')
+        .trim()
+        .isLength({min: 5, max: 20})
+        .withMessage('Must be between 5 and 20 characters'),
     ], (req, res) => {
 
         const errors = validationResult(req);
             if (!errors.isEmpty()) {
-                return res.status(400).json({ errors: errors.array() });
+                //return res.status(400).json({ errors: errors.array() });
+                console.log(errors);
+            }else{
+                console.log(req.body); 
             }
-            console.log(req.body);
+            
     
 });
 
