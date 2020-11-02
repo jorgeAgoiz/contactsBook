@@ -31,7 +31,7 @@ router.post('/signup', [
             //return res.status(400).json({ errors: errors.array() });
             console.log(errors);
         }else{
-            console.log(req.body); 
+            console.log("tutto benne"); 
         }
         
         // USERS REPOSITORY
