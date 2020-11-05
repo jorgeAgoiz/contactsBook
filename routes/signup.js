@@ -25,7 +25,14 @@ router.post('/signup', [
     body('password2')
         .trim()
         .isLength({min: 5, max: 20})
-        .withMessage('Must be between 5 and 20 characters'),
+        .withMessage('Must be between 5 and 20 characters')
+        .custom((password2, { req }) => {
+            if(password2 !== req.body.password1){
+                console.log(password2);
+                throw new Error('Passwords must match.');   
+            }
+            return true;
+        })
     ], async (req, res) => {
 
         const {inputUser, password1, password2} = req.body;
@@ -34,16 +41,18 @@ router.post('/signup', [
         if (!errors.isEmpty()) {
             //return res.status(400).json({ errors: errors.array() });
             console.log(errors);
+            res.sendFile(path.join(rootDir,'views', 'main.html'));
+        }else {
+            const userExists = await repo.getOne(inputUser);//Check if the email is bussy.
+            if(userExists){//If email is bussy...
+                res.sendFile(path.join(rootDir,'views', 'mainmenu.html')); 
+            } else {
+                // USERS REPOSITORY
+                repo.create(inputUser, password1, password2);//Call the method to create a new user     
+             };
         }
 
-        const userExists = await repo.getOne(inputUser);//Check if the email is bussy.
-        if(userExists){//If email is bussy...
-               res.sendFile(path.join(rootDir,'views', 'mainmenu.html')); 
-        } else {
-            // USERS REPOSITORY
-            repo.create(inputUser, password1, password2);//Call the method to create a new user    
-            
-        }
+        
         
 
 });
@@ -51,3 +60,6 @@ router.post('/signup', [
 module.exports = { 
     signupRouter: router 
 };
+
+
+/* Implementar del todo el metodo de compare passwords y hacer un hash del password */
