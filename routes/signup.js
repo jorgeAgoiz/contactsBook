@@ -3,7 +3,9 @@ const path = require('path');
 const express = require('express');
 const router = express.Router();
 const rootDir = require('../util/path');
-const User = require('../repositories/user');//Import the user repository
+
+const repo = require('../repositories/usersRepo');
+
 const { body, validationResult } = require('express-validator');
 
 // '/signup' => GET
@@ -24,21 +26,25 @@ router.post('/signup', [
         .trim()
         .isLength({min: 5, max: 20})
         .withMessage('Must be between 5 and 20 characters'),
-    ], (req, res) => {
+    ], async (req, res) => {
 
-        const errors = validationResult(req);
+        const {inputUser, password1, password2} = req.body;
+        const errors = validationResult(req);  
+
         if (!errors.isEmpty()) {
             //return res.status(400).json({ errors: errors.array() });
             console.log(errors);
-        }else{
-            console.log("tutto benne"); 
+        }
+
+        const userExists = await repo.getOne(inputUser);//Check if the email is bussy.
+        if(userExists){//If email is bussy...
+               res.sendFile(path.join(rootDir,'views', 'mainmenu.html')); 
+        } else {
+            // USERS REPOSITORY
+            repo.create(inputUser, password1, password2);//Call the method to create a new user    
+            
         }
         
-        // USERS REPOSITORY
-        const user1 = new User(req.body.inputUser, req.body.password1);
-        user1.save();
-        user1.fetchAllUsers();   
-        // USERS REPOSITORY
 
 });
 
