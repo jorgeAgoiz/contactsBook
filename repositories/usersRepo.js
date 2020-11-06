@@ -1,6 +1,10 @@
 //Packages
 const fs = require('fs');
 const crypto = require('crypto');
+const util = require('util');
+//To convert this callback function in a promise function with util.promisify
+const scrypt = util.promisify(crypto.scrypt);
+
 
 class UsersRepository {//Users repository structure
     constructor(filename) {
@@ -27,10 +31,19 @@ class UsersRepository {//Users repository structure
         return allUsers.find( user => user.inputUser === userInput );//This method read all file searching the value that we pass it.
     }
 
-    async create(inputUser, password1, password2) { //To create a new register
+    async create(inputUser, password1) { //To create a new register
         let allUsers = await this.getAll();//First call to all data inside the JSON file
         const id = this.randomId();//Generate a random Id to each user
-        const userReg = { inputUser, password1, id};
+        //To encrypt the password
+        const salt = await crypto.randomBytes(8).toString('hex');
+        const buf = await scrypt(password1, salt, 64);
+        //Construct the objetc that will be store
+        const userReg = { 
+            id,
+            inputUser, 
+            password1: `${buf.toString('hex')}.${salt}`
+        };
+
         allUsers.push(userReg);//Later push the new register with all data
         await this.writeAll(allUsers);//Call the writeAll method to rewrite from beginning all data.
         return userReg;//Return the new user

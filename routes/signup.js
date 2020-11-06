@@ -28,7 +28,6 @@ router.post('/signup', [
         .withMessage('Must be between 5 and 20 characters')
         .custom((password2, { req }) => {
             if(password2 !== req.body.password1){
-                console.log(password2);
                 throw new Error('Passwords must match.');   
             }
             return true;
@@ -48,12 +47,9 @@ router.post('/signup', [
                 res.sendFile(path.join(rootDir,'views', 'mainmenu.html')); 
             } else {
                 // USERS REPOSITORY
-                repo.create(inputUser, password1, password2);//Call the method to create a new user     
+                repo.create(inputUser, password1);//Call the method to create a new user     
              };
-        }
-
-        
-        
+        }   
 
 });
 
