@@ -47,4 +47,4 @@ module.exports = {
 };
 
 
-/* Implementar del todo el metodo de compare passwords y hacer un hash del password */
+/* La idea es liarme con el SignIn, crear un validator para comprobar que el usuario no esta ocupado */
