@@ -37,14 +37,14 @@
 
         <div class="row align-items-center justify-content-center titleApp">
             <div class="col-3 text-center">
-                <form method="POST">
+                <form action="/signin" method="POST">
                     <div class="form-group">
                       <label class="labelForm" for="inputUser">User</label>
-                      <input type="text" class="form-control" id="inputUser">
+                      <input type="text" class="form-control" name="inputUser" id="inputUser">
                     </div>
                     <div class="form-group">
                       <label class="labelForm" for="inputPassword1">Password</label>
-                      <input type="password" class="form-control" id="inputPassword1">
+                      <input type="password" class="form-control" name="password1" id="inputPassword1">
                     </div>
                     <button type="submit" class="labelForm btn btn-primary">Submit</button>
                   </form>

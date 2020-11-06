@@ -56,6 +56,34 @@ class UsersRepository {//Users repository structure
             );
     }
 
+    async comparePasswords(saved, supplied) {
+        //saved -> password saved in our database
+        //supplied -> password given to us by a user trying sign in
+        const [hashed, salt] = saved.split('.');
+        const hashedSuppliedBuf = await scrypt(supplied, salt, 64);
+
+        return hashed === hashedSuppliedBuf.toString('hex');
+    }
+
+    async getOneBy(filters) {//Find by email, password or id.
+        const records = await this.getAll();
+
+        for (let record of records) {// Iterate in users
+            let found = true;
+
+            for (let key in filters) {//Iterate in keys of user
+                if(record[key] !== filters[key]){
+                    found = false;
+                }
+            }
+
+            if(found){
+                console.log(record);
+                return record;
+            }
+        }
+    }
+
     randomId() {//Generate a random ID with crypto.randomBytes method of node.
         const id = crypto.randomBytes(4).toString('hex');
         return id;
