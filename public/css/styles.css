@@ -36,3 +36,12 @@ body {
     font-size: calc(1em + 1vw);
     color: black;
 }
+
+/* MAIN MENU PAGE */
+
+.btnMenu {
+    background-color: rgba(50, 209, 209, 0.8);
+    border-radius: 10px;
+    font-family: 'Anton', sans-serif;
+    font-size: calc(1em + 1vw);
+}

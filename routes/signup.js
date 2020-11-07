@@ -30,14 +30,15 @@ router.post('/signup', [
         if (!errors.isEmpty()) {
             //return res.status(400).json({ errors: errors.array() });
             console.log(errors);
-            res.sendFile(path.join(rootDir,'views', 'main.html'));
+            res.redirect(200, `/signup`);
         }else {
             const userExists = await repo.getOne(inputUser);//Check if the email is bussy.
             if(userExists){//If email is bussy...
-                res.sendFile(path.join(rootDir,'views', 'mainmenu.html')); 
+                res.redirect(200, `/signup`);
             } else {
                 // USERS REPOSITORY
-                repo.create(inputUser, password1);//Call the method to create a new user     
+                repo.create(inputUser, password1);//Call the method to create a new user
+                res.redirect(`/mainmenu/${inputUser}`);    
              };
         };   
 });
@@ -45,6 +46,3 @@ router.post('/signup', [
 module.exports = { 
     signupRouter: router 
 };
-
-
-/* La idea es liarme con el SignIn, crear un validator para comprobar que el usuario no esta ocupado */

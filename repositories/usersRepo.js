@@ -78,7 +78,6 @@ class UsersRepository {//Users repository structure
             }
 
             if(found){
-                console.log(record);
                 return record;
             }
         }

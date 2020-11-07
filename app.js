@@ -7,6 +7,7 @@ const app = express();//Instance of express server
 
 const { signupRouter } = require('./routes/signup');
 const { signinRouter } = require('./routes/signin');
+const { menuRouter } = require('./routes/mainmenu');
 
 //Middlewares
 app.use(express.json());
@@ -14,6 +15,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(signupRouter);
 app.use(signinRouter);
+app.use(menuRouter);
 
 // '/' => GET
 app.get('/', (req, res, next) => {
