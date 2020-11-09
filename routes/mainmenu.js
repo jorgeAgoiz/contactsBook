@@ -9,7 +9,7 @@ router.get('/mainmenu/:user', (req, res, next) => {
         pageTitle: 'My Contacts Book', 
         user: req.params.user
     });
-    //res.sendFile(path.join(rootDir, 'views', 'mainmenu.html'));
+    
     const userName = req.params.user;
     console.log(userName);   
 });
