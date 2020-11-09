@@ -12,7 +12,10 @@ const { body, validationResult } = require('express-validator');
 
 // '/signin' => GET
 router.get('/signin', (req, res, next) => {
-    res.sendFile(path.join(rootDir, 'views', 'signin.html'));
+    res.render('signin.ejs', {
+        pageTitle: 'Contacts Book - Sign In'
+    })
+    //res.sendFile(path.join(rootDir, 'views', 'signin.html'));
 });
 
 // '/signin' => POST

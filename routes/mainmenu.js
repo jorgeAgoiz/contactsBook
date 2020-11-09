@@ -5,7 +5,11 @@ const router = express.Router();
 const rootDir = require('../util/path');
 
 router.get('/mainmenu/:user', (req, res, next) => {
-    res.sendFile(path.join(rootDir, 'views', 'mainmenu.html'));
+    res.render('mainmenu.ejs', {
+        pageTitle: 'My Contacts Book', 
+        user: req.params.user
+    });
+    //res.sendFile(path.join(rootDir, 'views', 'mainmenu.html'));
     const userName = req.params.user;
     console.log(userName);   
 });

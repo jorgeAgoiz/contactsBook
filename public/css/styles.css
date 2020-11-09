@@ -45,3 +45,8 @@ body {
     font-family: 'Anton', sans-serif;
     font-size: calc(1em + 1vw);
 }
+
+.userText h1{
+    font-family: 'Anton', sans-serif;
+    font-size: calc(2em + 1.5vw);
+}
