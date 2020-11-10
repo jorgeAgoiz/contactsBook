@@ -8,6 +8,7 @@ const app = express();//Instance of express server
 const { signupRouter } = require('./routes/signup');
 const { signinRouter } = require('./routes/signin');
 const { menuRouter } = require('./routes/mainmenu');
+const { contactsRouter } = require('./routes/contacts');
 
 // EJ6 TEMPLATE ENGINE
 app.set('view engine', 'ejs');// Setting our default template engine
@@ -20,6 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(signupRouter);
 app.use(signinRouter);
 app.use(menuRouter);
+app.use(contactsRouter);
 
 // '/' => GET
 app.get('/', (req, res, next) => {

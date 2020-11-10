@@ -34,8 +34,8 @@
                 <h1>Welcome <%= user %></h1>
             </div>
             <div class="col-4">
-                <form action="/contacts" method="POST"><!-- I need to improve this logic to send the values -->
-                    <button type="submit" value="<%= user %>" class="btn btn-primary btn-lg btn-block mt-3 mb-4 btnMenu" href="/mainmenu/contacts">View contacts</button>
+                <form action="/mainmenu/contacts" method="POST"><!-- I need to improve this logic to send the values -->
+                    <button type="submit" value="<%= user %>" class="btn btn-primary btn-lg btn-block mt-3 mb-4 btnMenu">View contacts</button>
                     <button type="button" class="btn btn-primary btn-lg btn-block mt-3 mb-4 btnMenu" href="/mainmenu/add-contact">Add contact</button>    
                 </form> 
             </div>
