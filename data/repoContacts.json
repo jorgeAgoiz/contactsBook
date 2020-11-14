@@ -1,0 +1,29 @@
+[
+    {
+        "userFrom": "Estrella",
+        "id": "234234jas1",
+        "name": "Jorge",
+        "lastName": "Agoiz",
+        "birthday": "06/12/1984",
+        "phoneNumber": "666553344",
+        "email": "yoquese@gmail.com"
+    },
+    {
+        "userFrom": "Estrella",
+        "id": "ioq235sd133",
+        "name": "Maria",
+        "lastName": "Navas",
+        "birthday": "27/09/1986",
+        "phoneNumber": "722110099",
+        "email": "niidea@gmail.com"
+    },
+    {
+        "userFrom": "Estrella",
+        "id": "a0012jmYsad",
+        "name": "Jimmy",
+        "lastName": "McNulty",
+        "birthday": "16/05/1973",
+        "phoneNumber": "636000011",
+        "email": "thewire@gmail.com"
+    }
+]

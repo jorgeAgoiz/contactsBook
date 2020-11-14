@@ -4,11 +4,23 @@ const express = require('express');
 const router = express.Router();
 const rootDir = require('../util/path');
 
-router.post('/mainmenu/contacts', (req, res, next) => {
+
+// '/mainmenu/:user/contacts' => GET
+router.get('/mainmenu/:user/contacts', (req, res, next) => {
     res.send('<h1> Your contacts motherfucker!! </h1>');
 });
 
 
+// '/mainmenu/:user/add-contact' => GET
+router.get('/mainmenu/:user/add-contact', (req, res, next) => {
+    res.render('addContact.ejs', {
+        user: req.params.user
+    });
+});
+
+// '/mainmenu/:user/add-contact' => POST
+
+/* Construir los metodos POST para añadir contactos y ver contactos retocando los archivos .ejs */
 
 
 

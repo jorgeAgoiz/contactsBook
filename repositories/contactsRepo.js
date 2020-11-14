@@ -21,15 +21,50 @@ class contactsRepository {
         }));
     };
 
-    getOneBy() {
+    async getOneBy() {
+        const records = await this.getAll();
 
+        for (let record of records) {// Iterate in users
+            let found = true;
+
+            for (let key in filters) {//Iterate in keys of user
+                if(record[key] !== filters[key]){
+                    found = false;
+                }
+            }
+
+            if(found){
+                return record;
+            }
+        }
     }
 
-    save(name, lastName, birthday, phoneNumber, email) {
+    async save(userFrom, name, lastName, birthday, phoneNumber, email) {
+        let allContacts = await this.getAll();
+        let id = this.randomId();
 
+        const contactReg = {
+            id,
+            name,
+            lastName,
+            birthday,
+            phoneNumber,
+            email 
+        };
+
+        allContacts.push(contactReg);
+        await this.writeAll(allContacts);
+        return contactReg;
     }
 
-    deleteOne() {
+    async deleteOne(id) {
+        let records = await this.getAll();
+
+        const recordDel = records.find( record => record.id === id );
+
+        let indexContact = records.indexOf(recordDel);
+        console.log(indexContact);
+        //records.splice(indexContact, 1);
 
     }
 
@@ -43,8 +78,15 @@ class contactsRepository {
             JSON.stringify(repoContact, null, 2) //This is to structure the data inside the JSON file
         );
     }
+
+    randomId() {//Generate a random ID with crypto.randomBytes method of node.
+        const id = crypto.randomBytes(6).toString('hex');
+        return id;
+    }
 };
 
 
-const contactRepo = new contactsRepository('./data/contacts.json');
+const contactRepo = new contactsRepository('./data/repoContacts.json');
 module.exports = contactRepo;
+
+// Repositorio sin terminar probar varios metodos y finiquitar el repo, una vez terminado tocara introducir mongoose 
