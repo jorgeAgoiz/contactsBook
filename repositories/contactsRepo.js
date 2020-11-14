@@ -1,5 +1,9 @@
 //Packages
 const fs = require('fs');
+const crypto = require('crypto');
+const util = require('util');
+//To convert this callback function in a promise function with util.promisify
+const scrypt = util.promisify(crypto.scrypt);
 
 class contactsRepository {
     constructor(filename) {
@@ -14,7 +18,7 @@ class contactsRepository {
         }
     };
 
-    async getAll() { //To get all registers
+    async getAll() { //To get all registers WORK PERFECT
         //Open the file called this.filename, read file, parse file and return
         return JSON.parse(await fs.promises.readFile(this.filename, {
             encoding: 'utf8'
@@ -39,11 +43,12 @@ class contactsRepository {
         }
     }
 
-    async save(userFrom, name, lastName, birthday, phoneNumber, email) {
+    async save(userFrom, name, lastName, birthday, phoneNumber, email) {//Work perfect
         let allContacts = await this.getAll();
         let id = this.randomId();
 
         const contactReg = {
+            userFrom,
             id,
             name,
             lastName,

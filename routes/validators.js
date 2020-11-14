@@ -51,5 +51,22 @@ module.exports = {
             if(!user) {//if user doesnt exists
                 throw new Error('User not found.');
             }
-        })
+        }),
+    requireValidEmail: body('email')//Add Contact Validator
+        .trim()
+        .isEmail()
+        .normalizeEmail()
+        .withMessage('Must be a valid email'),
+    requireValidDate: body('birthday')
+        .trim()
+        .isDate({format: 'DD/MM/YYYY', delimiters: '/'})
+        .withMessage('Must be a valid date'),
+    requireValidName: body('nameC')
+        .trim()
+        .isEmpty()
+        .withMessage('Name is required'),
+    requireValidLastName: body('lastName')
+        .trim()
+        .isEmpty()
+        .withMessage('Last name is required')
 };

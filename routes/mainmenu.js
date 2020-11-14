@@ -10,7 +10,8 @@ router.get('/mainmenu/:user', (req, res, next) => {
         user: req.params.user
     });
     
-    const userName = req.params.user;   
+    const userName = req.params.user;
+    console.log(userName);   
 });
 
 /* Implementemos los metodos del menu principal */

@@ -1,8 +1,16 @@
 //Packages
 const path = require('path');
+const { body, validationResult } = require('express-validator');
 const express = require('express');
 const router = express.Router();
 const rootDir = require('../util/path');
+const contactsRepo = require('../repositories/contactsRepo');
+const { 
+    requireValidEmail, 
+    requireValidDate, 
+    requireValidName, 
+    requireValidLastName
+ } = require('../routes/validators');
 
 
 // '/mainmenu/:user/contacts' => GET
@@ -14,13 +22,35 @@ router.get('/mainmenu/:user/contacts', (req, res, next) => {
 // '/mainmenu/:user/add-contact' => GET
 router.get('/mainmenu/:user/add-contact', (req, res, next) => {
     res.render('addContact.ejs', {
-        user: req.params.user
+        user: req.params.user,
+        pageTitle: "Add A Contact"
     });
 });
 
 // '/mainmenu/:user/add-contact' => POST
+router.post('/mainmenu/add-contact', [
+    requireValidEmail, 
+    requireValidDate, 
+    requireValidName, 
+    requireValidLastName
+], async (req, res, next) => {
 
-/* Construir los metodos POST para añadir contactos y ver contactos retocando los archivos .ejs */
+    const errors = validationResult(req); 
+
+    if(!errors.isEmpty()){
+        console.log(errors);
+    } else {
+        const { nameC, lastName, birthday, phoneNumber, email, userName } = req.body;
+        const newUser = await contactsRepo.save(userName, nameC, lastName, birthday, phoneNumber, email);
+        console.log(newUser);
+    }
+
+
+
+});
+/* Construir los metodos POST para añadir contactos y ver contactos retocando los archivos .ejs
+no me van bien los validators de name y lastName
+*/
 
 
 
