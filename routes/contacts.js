@@ -49,7 +49,7 @@ router.post('/mainmenu/add-contact', [
 
 });
 /* Construir los metodos POST para añadir contactos y ver contactos retocando los archivos .ejs
-no me van bien los validators de name y lastName
+Acabod de solucionar el problema con los validator, estaba usando isEmpty en vez de notEmpty
 */
 
 

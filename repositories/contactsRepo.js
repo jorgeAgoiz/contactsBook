@@ -25,7 +25,7 @@ class contactsRepository {
         }));
     };
 
-    async getOneBy() {
+    async getOneBy() {//**************** UNFINISHED */
         const records = await this.getAll();
 
         for (let record of records) {// Iterate in users
@@ -62,7 +62,7 @@ class contactsRepository {
         return contactReg;
     }
 
-    async deleteOne(id) {
+    async deleteOne(id) {//****************** UNFINISHED */
         let records = await this.getAll();
 
         const recordDel = records.find( record => record.id === id );
@@ -94,4 +94,5 @@ class contactsRepository {
 const contactRepo = new contactsRepository('./data/repoContacts.json');
 module.exports = contactRepo;
 
-// Repositorio sin terminar probar varios metodos y finiquitar el repo, una vez terminado tocara introducir mongoose 
+// Repositorio sin terminar probar varios metodos y finiquitar el repo, una vez terminado tocara introducir mongoose
+// Siguientes metodos getContactsFrom, editContact y deleteContact 

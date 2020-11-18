@@ -79,5 +79,23 @@
     "birthday": "1956/07/18",
     "phoneNumber": "111223344",
     "email": "papito@gmail.com"
+  },
+  {
+    "userFrom": "Estrella",
+    "id": "2c375cf30b35",
+    "name": "Petrolicius",
+    "lastName": "Forever",
+    "birthday": "1982/09/12",
+    "phoneNumber": "111445522",
+    "email": "enfin@jiji.com"
+  },
+  {
+    "userFrom": "Estrella",
+    "id": "8d40f9cff987",
+    "name": "connor",
+    "lastName": "mcgregor",
+    "birthday": "1983/07/01",
+    "phoneNumber": "777447744",
+    "email": "ufc@veamos.com"
   }
 ]

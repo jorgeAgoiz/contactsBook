@@ -63,10 +63,11 @@ module.exports = {
         .withMessage('Must be a valid date'),
     requireValidName: body('nameC')
         .trim()
-        .isEmpty()
-        .withMessage('Name is required'),
+        .notEmpty()
+        .withMessage('Invalid name.'),
     requireValidLastName: body('lastName')
         .trim()
-        .isEmpty()
-        .withMessage('Last name is required')
+        .notEmpty()
+        .withMessage('Invalid last name.')
+        
 };
