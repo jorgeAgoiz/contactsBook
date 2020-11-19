@@ -25,25 +25,19 @@ class contactsRepository {
         }));
     };
 
-    async getOneBy() {//**************** UNFINISHED */
+    async getContactsFrom(usersFrom) {// WORK PERFECT */
         const records = await this.getAll();
+        const contactsFrom = [];
 
-        for (let record of records) {// Iterate in users
-            let found = true;
-
-            for (let key in filters) {//Iterate in keys of user
-                if(record[key] !== filters[key]){
-                    found = false;
-                }
-            }
-
-            if(found){
-                return record;
-            }
+        for (let record of records) {// Iterate in contacts
+            if ( record.userFrom === usersFrom) {
+                contactsFrom.push(record);//If this contact is from our specify user
+            };
         }
+        return contactsFrom;//Return the new array with the specify contacts from each user
     }
 
-    async save(userFrom, name, lastName, birthday, phoneNumber, email) {//Work perfect
+    async save(userFrom, name, lastName, birthday, phoneNumber, email) {//WORK PERFECT
         let allContacts = await this.getAll();
         let id = this.randomId();
 
@@ -95,4 +89,4 @@ const contactRepo = new contactsRepository('./data/repoContacts.json');
 module.exports = contactRepo;
 
 // Repositorio sin terminar probar varios metodos y finiquitar el repo, una vez terminado tocara introducir mongoose
-// Siguientes metodos getContactsFrom, editContact y deleteContact 
+// Siguientes metodo editContact y deleteContact 

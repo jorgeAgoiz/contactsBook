@@ -4,7 +4,7 @@ const { body, validationResult } = require('express-validator');
 const express = require('express');
 const router = express.Router();
 const rootDir = require('../util/path');
-const contactsRepo = require('../repositories/contactsRepo');
+const contactRepo = require('../repositories/contactsRepo');
 const { 
     requireValidEmail, 
     requireValidDate, 
@@ -14,8 +14,14 @@ const {
 
 
 // '/mainmenu/:user/contacts' => GET
-router.get('/mainmenu/:user/contacts', (req, res, next) => {
-    res.send('<h1> Your contacts motherfucker!! </h1>');
+router.get('/mainmenu/:user/contacts', async (req, res, next) => {
+    const userC = req.params.user;
+    const resultContacts = await contactRepo.getContactsFrom(userC);
+
+    res.render('myContacts.ejs', {
+        contacts: resultContacts,
+        pageTitle: "My Contacts"
+    });
 });
 
 
@@ -41,7 +47,7 @@ router.post('/mainmenu/add-contact', [
         console.log(errors);
     } else {
         const { nameC, lastName, birthday, phoneNumber, email, userName } = req.body;
-        const newUser = await contactsRepo.save(userName, nameC, lastName, birthday, phoneNumber, email);
+        const newUser = await contactRepo.save(userName, nameC, lastName, birthday, phoneNumber, email);
         console.log(newUser);
     }
 

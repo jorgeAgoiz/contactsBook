@@ -1,5 +1,6 @@
 body {
-    background-image: url("https://s2.best-wallpaper.net/wallpaper/5120x2880/1903/Orange-stripe-background-abstract_5120x2880.jpg");
+    background-color: rgb(189, 133, 64);
+    /*background-image: url("https://s2.best-wallpaper.net/wallpaper/5120x2880/1903/Orange-stripe-background-abstract_5120x2880.jpg");*/
     background-size: cover;
     background-attachment: fixed;
 }
@@ -49,4 +50,33 @@ body {
 .userText h1{
     font-family: 'Anton', sans-serif;
     font-size: calc(2em + 1.5vw);
+}
+
+/* CONTACTS LIST */
+
+.contactCard {
+    background-color: rgb(110, 110, 6);
+    border-radius: 12px;
+    border: 2px solid black;
+    margin-top: 15px;
+}
+
+.contactName {
+    font-family: 'Goldman', cursive;
+    font-size: calc(0.6em + 0.8vw);
+}
+
+.contactBirthday {
+    font-family: 'Goldman', cursive;
+    font-size: calc(0.6em + 0.8vw);
+}
+
+.contactEmail {
+    font-family: 'Goldman', cursive;
+    font-size: calc(0.6em + 0.8vw);
+}
+
+.contactNumber {
+    font-family: 'Goldman', cursive;
+    font-size: calc(0.6em + 0.8vw);
 }
