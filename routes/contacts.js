@@ -24,6 +24,19 @@ router.get('/mainmenu/:user/contacts', async (req, res, next) => {
     });
 });
 
+// '/mainmenu/:user/delete-contact' => POST
+router.post('/mainmenu/:user/delete-contact', async (req, res, next) => {
+    const contactId = req.body.idDelete;
+    const userMenu = req.params.user;
+    
+    console.log(userMenu);
+
+    const contactDel = await contactRepo.deleteOne(contactId);
+    console.log(contactDel);
+
+    res.redirect(`/mainmenu/${userMenu}/contacts`);//********* Check modal in bootstrap framework
+});
+
 
 // '/mainmenu/:user/add-contact' => GET
 router.get('/mainmenu/:user/add-contact', (req, res, next) => {

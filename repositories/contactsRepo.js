@@ -59,11 +59,13 @@ class contactsRepository {
     async deleteOne(id) {//****************** UNFINISHED */
         let records = await this.getAll();
 
-        const recordDel = records.find( record => record.id === id );
+        const recordDelIndex = records.findIndex( record => record.id === id );
+        console.log(recordDelIndex);
+        const contactDeleted = records.splice(recordDelIndex, 1);
+        console.log(contactDeleted);
 
-        let indexContact = records.indexOf(recordDel);
-        console.log(indexContact);
-        //records.splice(indexContact, 1);
+        await this.writeAll(records);
+        return contactDeleted;
 
     }
 
@@ -89,4 +91,4 @@ const contactRepo = new contactsRepository('./data/repoContacts.json');
 module.exports = contactRepo;
 
 // Repositorio sin terminar probar varios metodos y finiquitar el repo, una vez terminado tocara introducir mongoose
-// Siguientes metodo editContact y deleteContact 
+// Solo falta ajustar el editContact y lo tendriamos listo a falta de adecentarlo visualmente
