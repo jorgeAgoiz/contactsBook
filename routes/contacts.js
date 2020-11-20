@@ -92,8 +92,7 @@ router.post('/mainmenu/:user/edit-contact/:idEdit', async (req, res, next) => {
     res.redirect(`/mainmenu/${userFrom}/contacts`);
 });
 
-/* Construir los metodos POST para añadir contactos y ver contactos retocando los archivos .ejs
-Acabod de solucionar el problema con los validator, estaba usando isEmpty en vez de notEmpty
+/* Retocar la interfaz de la app y añadir sessions al loggeo
 */
 
 
