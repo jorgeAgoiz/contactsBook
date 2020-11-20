@@ -39,8 +39,8 @@ class contactsRepository {
 
     async save(userFrom, name, lastName, birthday, phoneNumber, email) {//WORK PERFECT
         let allContacts = await this.getAll();
+        
         let id = this.randomId();
-
         const contactReg = {
             userFrom,
             id,
@@ -53,8 +53,29 @@ class contactsRepository {
 
         allContacts.push(contactReg);
         await this.writeAll(allContacts);
-        return contactReg;
+        return contactReg; 
+          
     }
+
+
+    async modify(id, userFrom, name, lastName, birthday, phoneNumber, email){
+        let allContacts = await this.getAll();
+        const existingContact = allContacts.findIndex( contact => contact.id === id);
+        const editedContact = { 
+            userFrom, 
+            id, 
+            name, 
+            lastName, 
+            birthday, 
+            phoneNumber, 
+            email 
+        };
+
+        allContacts[existingContact] = editedContact;
+        await this.writeAll(allContacts);
+        return editedContact;
+    };
+
 
     async deleteOne(id) {//****************** UNFINISHED */
         let records = await this.getAll();
@@ -69,8 +90,11 @@ class contactsRepository {
 
     }
 
-    editOne() {
+    async findOne(id) {
+        let records = await this.getAll();
+        const contactResult = records.find( cont => cont.id === id );
 
+        return contactResult;
     }
 
     async writeAll(repoContact) { //To rewrite all JSON file, the argument is the new data.

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pageTitle %></title>
+    <!-- FONTS  -->
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap" rel="stylesheet">
+
+    <!-- BOOTSTRAP 4 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" 
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    <!-- MY OWN STYLES -->
+    <link rel="stylesheet" href="/css/styles.css">
+
+</head>
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 navBar">
+                <ul class="nav justify-content-center">
+                    <li class="nav-item pl-4 pr-4">
+                        <a class="nav-link linkText" href="/">Sign Out</a>
+                    </li>  
+                </ul>
+            </div> 
+        </div>
+
+
+        <div class="col-12 text-center userText mt-2 mt-2">
+            <h1>Edit Your Contact</h1>
+        </div>
+        <div class="row align-items-center justify-content-center titleApp">
+            
+            <div class="col-3 text-center">
+                <form action="/mainmenu/<%= contact.userFrom %>/edit-contact/<%= contact.id %>" method="POST">
+                    <div class="form-group">
+                      <label class="labelForm" for="nameC">Name</label>
+                      <input type="text" class="form-control" value="<%= contact.name %>" name="nameC" id="nameC">
+                    </div>
+                    <div class="form-group">
+                        <label class="labelForm" for="lastName">Last Name</label>
+                        <input type="text" class="form-control" value="<%= contact.lastName %>" name="lastName" id="lastName">
+                    </div>
+                    <div class="form-group">
+                        <label class="labelForm" for="birthday">Birthday</label>
+                        <input type="text" placeholder="YYYY/MM/DD" class="form-control" value="<%= contact.birthday %>" name="birthday" id="birthday">
+                    </div>
+                    <div class="form-group">
+                        <label class="labelForm" for="phoneNumber">Phone Number</label>
+                        <input type="text" class="form-control" value="<%= contact.phoneNumber %>" name="phoneNumber" id="phoneNumber">
+                    </div>
+                    <div class="form-group">
+                        <label class="labelForm" for="email">Email</label>
+                        <input type="text" placeholder="example@email.com" class="form-control" value="<%= contact.email %>" name="email" id="email">
+                    </div>
+                    <button type="submit" class="labelForm btn btn-primary">Save</button>
+                  </form>
+            </div>
+        </div>
+           
+    </div>
+    
+
+    <!-- BOOTSTRAP 4 .JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" 
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" 
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" 
+    integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+</body>
+</html>

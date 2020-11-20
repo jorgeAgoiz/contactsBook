@@ -55,18 +55,43 @@ router.post('/mainmenu/add-contact', [
 ], async (req, res, next) => {
 
     const errors = validationResult(req); 
+    const { nameC, lastName, birthday, phoneNumber, email, userName } = req.body;
 
     if(!errors.isEmpty()){
         console.log(errors);
     } else {
-        const { nameC, lastName, birthday, phoneNumber, email, userName } = req.body;
         const newUser = await contactRepo.save(userName, nameC, lastName, birthday, phoneNumber, email);
         console.log(newUser);
     }
-
-
-
+    res.redirect(`/mainmenu/${userName}`);
 });
+
+
+router.get('/mainmenu/:user/edit-contact/:idEdit', async (req, res, next) => {
+    
+    const idContact = req.params.idEdit; 
+    const userContact = req.params.user;
+    
+    const contactEdit = await contactRepo.findOne(idContact);
+    console.log(contactEdit);
+
+    res.render('editContact.ejs', {
+        pageTitle: 'Edit Contact',
+        contact: contactEdit
+    });
+});
+
+router.post('/mainmenu/:user/edit-contact/:idEdit', async (req, res, next) => {
+
+    const { nameC, lastName, birthday, phoneNumber, email } = req.body;
+    const id = req.params.idEdit;
+    const userFrom = req.params.user;
+
+    const editedCorrect = await contactRepo.modify(id, userFrom, nameC, lastName, birthday, phoneNumber, email);
+    console.log(editedCorrect);
+    res.redirect(`/mainmenu/${userFrom}/contacts`);
+});
+
 /* Construir los metodos POST para añadir contactos y ver contactos retocando los archivos .ejs
 Acabod de solucionar el problema con los validator, estaba usando isEmpty en vez de notEmpty
 */
@@ -76,9 +101,3 @@ Acabod de solucionar el problema con los validator, estaba usando isEmpty en vez
 module.exports = {
     contactsRouter: router
 };
-
-
-/**
- * I need to catch the data with submit buttons from mainmenu.ejs and show in this section.
- * Also needs to learn about cookies session
- */

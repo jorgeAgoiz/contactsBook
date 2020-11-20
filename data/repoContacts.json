@@ -19,30 +19,12 @@
   },
   {
     "userFrom": "Estrella",
-    "id": "c173e28b0994",
-    "name": "jorge",
-    "lastName": "agoiz",
-    "birthday": "09/08/90",
-    "phoneNumber": "555667788",
-    "email": "barreras@gmail.com"
-  },
-  {
-    "userFrom": "Estrella",
     "id": "e854bfdb55e0",
     "name": "keanu",
     "lastName": "reves",
     "birthday": "09/09/89",
     "phoneNumber": "777445533",
     "email": "nose"
-  },
-  {
-    "userFrom": "Estrella",
-    "id": "bfaf43c1625d",
-    "name": "keanu",
-    "lastName": "reves",
-    "birthday": "09/09/1985",
-    "phoneNumber": "888665544",
-    "email": "prueba@gmail.com"
   },
   {
     "userFrom": "Estrella",
@@ -88,5 +70,41 @@
     "birthday": "1983/07/01",
     "phoneNumber": "777447744",
     "email": "ufc@veamos.com"
+  },
+  {
+    "userFrom": "Cristian",
+    "id": "4abf4c142911",
+    "name": "Juan",
+    "lastName": "Gomez",
+    "birthday": "1978/03/19",
+    "phoneNumber": "000992288",
+    "email": "papanatas@hdr.com"
+  },
+  {
+    "userFrom": "Cristian",
+    "id": "84ef5cc332ca",
+    "name": "Sonia",
+    "lastName": "Fernandez",
+    "birthday": "1982/05/04",
+    "phoneNumber": "112112",
+    "email": "ingeniera@hdr.com"
+  },
+  {
+    "userFrom": "Cristian",
+    "id": "47798e3f5439",
+    "name": "Fernando",
+    "lastName": "Castro",
+    "birthday": "1958/11/21",
+    "phoneNumber": "000998811",
+    "email": "jefeequipo@hdr.com"
+  },
+  {
+    "userFrom": "Cristian",
+    "id": "2cde62b3edd7",
+    "name": "Javi",
+    "lastName": "Exposito",
+    "birthday": "1981/05/19",
+    "phoneNumber": "111221122",
+    "email": "delegado@hdr.com"
   }
 ]
