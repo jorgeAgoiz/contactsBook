@@ -77,7 +77,7 @@ class contactsRepository {
     };
 
 
-    async deleteOne(id) {//****************** UNFINISHED */
+    async deleteOne(id) {//****************** WORK PERFECT */
         let records = await this.getAll();
 
         const recordDelIndex = records.findIndex( record => record.id === id );
