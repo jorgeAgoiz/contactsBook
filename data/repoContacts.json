@@ -106,5 +106,14 @@
     "birthday": "1984/07/12",
     "phoneNumber": "888445566",
     "email": "theking@lakers.com"
+  },
+  {
+    "userFrom": "theDoctor",
+    "id": "5d181e86c827",
+    "name": "Jorge",
+    "lastName": "Lorenzo",
+    "birthday": "1987/06/24",
+    "phoneNumber": "222002211",
+    "email": "jlorenzo@motogp.com"
   }
 ]
