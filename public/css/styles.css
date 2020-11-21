@@ -48,13 +48,23 @@ body {
 
 .userText h1{
     font-family: 'Anton', sans-serif;
-    font-size: calc(2em + 1.5vw);
+    font-size: calc(1.8em + 1.3vw);
 }
 
 /* CONTACTS LIST */
 
+.deleteBtn {
+    background-color: rgba(50, 209, 209, 0.8);
+    color: black;
+}
+
+.editBtn {
+    background-color: rgba(50, 209, 209, 0.8);
+    color: black;
+}
+
 .contactCard {
-    background-color: rgb(110, 110, 6);
+    background-color: rgba(207, 239, 247, 0.7);
     border-radius: 12px;
     border: 2px solid black;
     margin-top: 15px;
@@ -63,6 +73,9 @@ body {
 .contactName {
     font-family: 'Goldman', cursive;
     font-size: calc(0.6em + 0.8vw);
+    background-color: rgba(146, 227, 241, 0.7);
+    border-radius: 12px;
+    border: 1px solid black;
 }
 
 .contactBirthday {
@@ -78,4 +91,15 @@ body {
 .contactNumber {
     font-family: 'Goldman', cursive;
     font-size: calc(0.6em + 0.8vw);
+}
+
+/* EDIT FORM PAGE*/
+
+.editFormBtn {
+    background-color: rgba(50, 209, 209, 0.8);
+    color: black;
+}
+
+.labelForm {
+    font-size: calc(0.7em + 0.9vw);
 }

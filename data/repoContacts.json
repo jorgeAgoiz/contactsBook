@@ -4,7 +4,7 @@
     "id": "234234jas1",
     "name": "Jorge",
     "lastName": "Agoiz",
-    "birthday": "06/12/1984",
+    "birthday": "1984/12/06",
     "phoneNumber": "666553344",
     "email": "yoquese@gmail.com"
   },
@@ -41,7 +41,7 @@
     "name": "Marta",
     "lastName": "Agoiz",
     "birthday": "1992/02/18",
-    "phoneNumber": "656770011",
+    "phoneNumber": "888334411",
     "email": "martuki@gmail.com"
   },
   {
@@ -61,15 +61,6 @@
     "birthday": "1982/09/12",
     "phoneNumber": "111445522",
     "email": "enfin@jiji.com"
-  },
-  {
-    "userFrom": "Estrella",
-    "id": "8d40f9cff987",
-    "name": "connor",
-    "lastName": "mcgregor",
-    "birthday": "1983/07/01",
-    "phoneNumber": "777447744",
-    "email": "ufc@veamos.com"
   },
   {
     "userFrom": "Cristian",
@@ -106,5 +97,14 @@
     "birthday": "1981/05/19",
     "phoneNumber": "111221122",
     "email": "delegado@hdr.com"
+  },
+  {
+    "userFrom": "Estrella",
+    "id": "cb78ff97bf1c",
+    "name": "Lebron",
+    "lastName": "James",
+    "birthday": "1984/07/12",
+    "phoneNumber": "888445566",
+    "email": "theking@lakers.com"
   }
 ]

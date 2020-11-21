@@ -52,7 +52,7 @@ module.exports = {
                 throw new Error('User not found.');
             }
         }),
-    requireValidEmail: body('email')//Add Contact Validator
+    requireValidEmail: body('email')//Add and Edit Contact Validator
         .trim()
         .isEmail()
         .normalizeEmail()
