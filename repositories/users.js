@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const Contact = require('./contacts');
 
 const sequelize = require('../util/database');
 
@@ -7,7 +8,11 @@ const User = sequelize.define('users', {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
+        references: {
+            model: Contact,
+            key: 'userId'
+        }
     },
     username: {
         type: Sequelize.STRING,
@@ -19,5 +24,7 @@ const User = sequelize.define('users', {
         allowNull: false
     }
 });
+
+User.hasMany(Contact, {foreignKey: 'userId', targetKey: 'id'});
 
 module.exports = User;
