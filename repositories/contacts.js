@@ -12,11 +12,7 @@ const Contact = sequelize.define('contacts', {
     },
     userId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-            model: User,
-            key: 'id'
-        }
+        allowNull: false
     },
     name: {
         type: Sequelize.STRING,
@@ -40,6 +36,6 @@ const Contact = sequelize.define('contacts', {
     }
 });
 
-Contact.belongsTo(User, {foreignKey: 'id', targetKey: 'userId'});
+
 
 module.exports = Contact;
