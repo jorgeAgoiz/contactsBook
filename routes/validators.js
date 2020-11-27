@@ -1,5 +1,6 @@
 const { body } = require('express-validator');
 const usersRepo = require('../repositories/usersRepo');
+const User = require('../repositories/users');
 
 module.exports = {
     requireValidUser: body('inputUser')//Validator Sign Up
@@ -27,31 +28,35 @@ module.exports = {
             return true;
         }),
     requireValidPasswordForUser: body('password1')//Validator Sign In
-        .trim()
-        .custom(async (password2, { req }) => {//Custon validator to compare the passwords
-            const user = await usersRepo.getOneBy({ inputUser: req.body.inputUser });
-            if (!user) {
-                throw new Error('Invalid password.');
-            }
-            const validPassword = await usersRepo.comparePasswords(
-                user.password1,
-                password2
-            );
+        .trim(),
+        /* .custom(async ({ req }) => {//Custon validator to compare the passwords
 
-            if(!validPassword) {//if password is not correct
-                throw new Error('Invalid password.');
-            }
-        }),
+            await User.findOne({ where: { 
+                password: password1, 
+                username: req.body.inputUser}
+                })
+                .then( user => {
+                    console.log('Correct validation');
+                })
+                .catch( err => {
+                    console.log(err);
+                    throw new Error('Invalid password.');
+                });
+        }), */
     requireValidUserName: body('inputUser')//Validator Sign In
         .trim()
         .notEmpty()
-        .withMessage('Must provide a valid user.')
-        .custom(async inputUser => {//Custom validator to find the user in DB
-            const user = await usersRepo.getOneBy({ inputUser });
-            if(!user) {//if user doesnt exists
-                throw new Error('User not found.');
-            }
-        }),
+        .withMessage('Must provide a valid user.'),
+        /* .custom(async inputUser => {//Custom validator to find the user in DB
+            await User.findOne({ where: { username: inputUser } })
+                .then( user => {
+                    console.log(`Correct User ${user}`);
+                })
+                .catch( err => {
+                    console.log(err);
+                    throw new Error('User not found.');
+                });
+        }),*/
     requireValidEmail: body('email')//Add and Edit Contact Validator
         .trim()
         .isEmail()

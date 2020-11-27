@@ -9,6 +9,7 @@ const {
 } = require('./validators');
 
 const { body, validationResult } = require('express-validator');
+const User = require('../repositories/users');
 
 // '/signin' => GET
 router.get('/signin', (req, res, next) => {
@@ -24,14 +25,25 @@ router.post('/signin', [
     requireValidUserName
 ], async (req, res, next) => {
     
-    const errors = validationResult(req); 
+    const errors = validationResult(req);
 
     if(!errors.isEmpty()){
         console.log(errors);
+        res.redirect(`/signin`);
     }else {
-        res.redirect(`/mainmenu/${req.body.inputUser}`);
-    }
-    
+        const { inputUser, password1 } = req.body;
+        User.findOne({where: {
+            username: inputUser,
+            password: password1
+        }})
+        .then( user => {
+            res.redirect(`/mainmenu/${user.username}`);
+        })
+        .catch( err => {
+            console.log(err);
+            res.redirect(`/signin`);
+        });    
+    } 
 });
 
 module.exports = {

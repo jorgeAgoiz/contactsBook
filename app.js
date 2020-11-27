@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 
 const express = require('express');
 const app = express();//Instance of express server
+const sequelize = require('./util/database');
 
 const { signupRouter } = require('./routes/signup');
 const { signinRouter } = require('./routes/signin');
@@ -31,7 +32,16 @@ app.get('/', (req, res, next) => {
     //res.sendFile('/views/main.html', { root : __dirname});
 });
 
+sequelize
+    .sync()
+    .then( result => {
+        //console.log(result);
+        app.listen(3000, () => {
+            console.log('Listening in port 3000...');
+        });
+    })
+    .catch( err => {
+        console.log(err);
+    });
+
 //Listen in port 3000
-app.listen(3000, () => {
-    console.log('Listening in port 3000...');
-});

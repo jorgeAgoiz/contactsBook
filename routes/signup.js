@@ -3,6 +3,10 @@ const path = require('path');
 const express = require('express');
 const router = express.Router();
 const rootDir = require('../util/path');
+const crypto = require('crypto');
+const util = require('util');
+//To convert this callback function in a promise function with util.promisify
+const scrypt = util.promisify(crypto.scrypt);
 
 const {
     requireValidUser,
@@ -10,7 +14,8 @@ const {
     requirePasswordConfirmation
 } = require('./validators');
 
-const repo = require('../repositories/usersRepo');
+const repo = require('../repositories/usersRepo');//************************************************************ */
+const User = require('../repositories/users');
 const { body, validationResult } = require('express-validator');
 
 // '/signup' => GET
@@ -21,28 +26,33 @@ router.get('/signup', (req, res, next) => {
     //res.sendFile(path.join(rootDir,'views', 'signup.html'));
 });
 // '/signup' => POST
-router.post('/signup', [
+router.post('/signup', [// SEQUELIZE IMPLEMENTED
     requireValidUser,
     requireValidPassword,
     requirePasswordConfirmation
     ], async (req, res) => {
 
         const {inputUser, password1, password2} = req.body;
-        const errors = validationResult(req);  
-
-        if (!errors.isEmpty()) {
-            //return res.status(400).json({ errors: errors.array() });
+        const errors = validationResult(req);
+        //To encrypt the password
+        const salt = await crypto.randomBytes(8).toString('hex');
+        const buf = await scrypt(password1, salt, 64);
+        
+        if (!errors.isEmpty()) {       
             console.log(errors);
-            res.redirect(200, `/signup`);
         }else {
-            const userExists = await repo.getOne(inputUser);//Check if the email is bussy.
-            if(userExists){//If email is bussy...
-                res.redirect(200, `/signup`);
-            } else {
-                // USERS REPOSITORY
-                repo.create(inputUser, password1);//Call the method to create a new user
-                res.redirect(`/mainmenu/${inputUser}`);    
-             };
+            User.create({
+                username: inputUser,
+                password: `${buf.toString('hex')}.${salt}`
+                })
+                .then( result => {
+                    console.log(result);
+                    res.redirect(`/mainmenu/${inputUser}`);   
+                })
+                .catch( err => {
+                    console.log(err);
+                    res.redirect(200, `/signup`);
+                });
         };   
 });
 
