@@ -34,7 +34,7 @@
                 <h1>Welcome <%= user %></h1>
             </div>
             <div class="col-4">
-                <form action="/mainmenu/<%= user %>/contacts" method="GET"><!-- I need to improve this logic to send the values -->
+                <form action="/mainmenu/<%= userId %>/contacts/<%= user %>" method="GET"><!-- I need to improve this logic to send the values -->
                     <button type="submit" class="btn btn-primary btn-lg btn-block mt-3 mb-4 btnMenu">View contacts</button>
                 </form>
                 <form action="/mainmenu/<%= user %>/add-contact" method="GET">

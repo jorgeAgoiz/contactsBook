@@ -21,6 +21,6 @@ const User = sequelize.define('users', {
     }
 });
 
-
+User.hasMany(Contact, {foreignKey: 'userId', sourceKey: 'id'});
 
 module.exports = User;

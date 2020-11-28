@@ -5,6 +5,9 @@ const express = require('express');
 const router = express.Router();
 const rootDir = require('../util/path');
 const contactRepo = require('../repositories/contactsRepo');
+const Contact = require('../repositories/contacts');
+const User = require('../repositories/users');
+
 const { 
     requireValidEmail, 
     requireValidDate, 
@@ -12,17 +15,29 @@ const {
     requireValidLastName
  } = require('../routes/validators');
 
+// '/mainmenu/:userId/contacts' => GET
+router.get('/mainmenu/:userId/contacts/:user', async (req, res, next) => {
+    const userC = req.params.userId;
+    const userN = req.params.user;
 
-// '/mainmenu/:user/contacts' => GET
-router.get('/mainmenu/:user/contacts', async (req, res, next) => {
-    const userC = req.params.user;
-    const resultContacts = await contactRepo.getContactsFrom(userC);
+    await Contact.findAll({ where: { userId: userC }})
+                .then( results => {
+                    console.log(results);
 
-    res.render('myContacts.ejs', {
-        contacts: resultContacts,
-        pageTitle: "My Contacts",
-        user: userC
-    });
+                    res.render('myContacts.ejs', {
+                        contacts: results,
+                        pageTitle: "My Contacts",
+                        userId: userC, 
+                        user: userN
+                    });
+                })
+                .catch( err => {
+                    console.log(err);
+                    res.redirect(`/mainmenu/${userN}`);
+                });
+    //const resultContacts = await contactRepo.getContactsFrom(userC);
+
+    
 });
 
 // '/mainmenu/:user/delete-contact' => POST
@@ -37,14 +52,26 @@ router.post('/mainmenu/:user/delete-contact', async (req, res, next) => {
 
 
 // '/mainmenu/:user/add-contact' => GET
-router.get('/mainmenu/:user/add-contact', (req, res, next) => {
-    res.render('addContact.ejs', {
-        user: req.params.user,
-        pageTitle: "Add A Contact"
-    });
-});
+router.get('/mainmenu/:user/add-contact', async (req, res, next) => {
 
-// '/mainmenu/:user/add-contact' => POST
+    const userName = req.params.user;
+
+    await User.findOne({ where: { username: userName }})
+            .then( result => {
+                console.log(result); 
+                res.render('addContact.ejs', {
+                    userId: result.id,
+                    pageTitle: "Add A Contact",
+                    userName: userName
+                });
+            })
+            .catch( err => {
+                console.log(err);
+                res.redirect(`/mainmenu/${userName}`);
+            });    
+});// *********************** This is OK *****************************
+
+// '/mainmenu/add-contact' => POST
 router.post('/mainmenu/add-contact', [
     requireValidEmail, 
     requireValidDate, 
@@ -52,16 +79,31 @@ router.post('/mainmenu/add-contact', [
     requireValidLastName
 ], async (req, res, next) => {
 
-    const errors = validationResult(req); 
-    const { nameC, lastName, birthday, phoneNumber, email, userName } = req.body;
+    const errors = validationResult(req);
+    const { nameC, lastName, birthday, phoneNumber, email, userId, userName } = req.body;
 
     if(!errors.isEmpty()){
         console.log(errors);
     } else {
-        const newUser = await contactRepo.save(userName, nameC, lastName, birthday, phoneNumber, email);
+        await Contact.create({
+            userId: userId,
+            name: nameC,
+            lastName: lastName,
+            birthday: birthday,
+            phoneNumber: phoneNumber,
+            email: email
+        })
+        .then( result => {
+            console.log('Contact Stored.');
+            res.redirect(`/mainmenu/${userName}`);
+        })
+        .catch( err => {
+            console.log(err);
+            res.redirect('/mainmenu/add-contact');
+        });
     }
-    res.redirect(`/mainmenu/${userName}`);
-});
+    
+});// *************** This i OK **********************
 
 // '/mainmenu/:user/edit-contact/:idEdit' => 'GET'
 router.get('/mainmenu/:user/edit-contact/:idEdit', async (req, res, next) => {

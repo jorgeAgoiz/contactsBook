@@ -26,7 +26,7 @@
                         <a class="nav-link linkText" href="/">Sign Out</a>
                     </li>
                     <li class="nav-item pl-4 pr-4">
-                        <a class="nav-link linkText" href="/mainmenu/<%= user %>">Main Menu</a>
+                        <a class="nav-link linkText" href="/mainmenu/<%= userName %>">Main Menu</a>
                     </li>    
                 </ul>
             </div> 
@@ -61,7 +61,8 @@
                         <input type="text" placeholder="example@email.com" class="form-control" name="email" id="email">
                     </div>
                     <div class="form-group">
-                        <input type="hidden" class="form-control" value="<%= user %>" name="userName">
+                        <input type="hidden" class="form-control" value="<%= userId %>" name="userId">
+                        <input type="hidden" class="form-control" value="<%= userName %>" name="userName">
                     </div>
                     <button type="submit" class="editFormBtn labelForm btn btn-primary">Submit</button>
                   </form>
