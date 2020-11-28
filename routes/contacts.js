@@ -35,20 +35,20 @@ router.get('/mainmenu/:userId/contacts/:user', async (req, res, next) => {
                     console.log(err);
                     res.redirect(`/mainmenu/${userN}`);
                 });
-    //const resultContacts = await contactRepo.getContactsFrom(userC);
-
-    
-});
+});// ********************* This is OK ********************
 
 // '/mainmenu/:user/delete-contact' => POST
-router.post('/mainmenu/:user/delete-contact', async (req, res, next) => {
+router.post('/mainmenu/:userId/delete-contact', async (req, res, next) => {
     const contactId = req.body.idDelete;
-    const userMenu = req.params.user;
+    const userMenu = req.params.userId;
 
-    const contactDel = await contactRepo.deleteOne(contactId);
+    const user = await User.findOne({ where: { id: userMenu }});
 
-    res.redirect(`/mainmenu/${userMenu}/contacts`);//********* Check modal in bootstrap framework
-});
+    const cont = await Contact.findOne({ where: { id: contactId }});
+    await cont.destroy();
+
+    res.redirect(`/mainmenu/${userMenu}/contacts/${user.username}`);//********* Check modal in bootstrap framework
+});//************************** This is OK ***************** */
 
 
 // '/mainmenu/:user/add-contact' => GET
@@ -106,19 +106,28 @@ router.post('/mainmenu/add-contact', [
 });// *************** This i OK **********************
 
 // '/mainmenu/:user/edit-contact/:idEdit' => 'GET'
-router.get('/mainmenu/:user/edit-contact/:idEdit', async (req, res, next) => {
+router.get('/mainmenu/:userId/edit-contact/:idEdit', async (req, res, next) => {
     
     const idContact = req.params.idEdit; 
-    const userContact = req.params.user;
-    
-    const contactEdit = await contactRepo.findOne(idContact);
+    const userId = req.params.userId;
 
-    res.render('editContact.ejs', {
-        pageTitle: 'Edit Contact',
-        contact: contactEdit,
-        user: userContact
-    });
-});
+    const user = await User.findOne({ where: { id: userId }});
+    
+    await Contact.findOne({ where: { id: idContact }})
+                .then( result => {
+
+                    res.render('editContact.ejs', {
+                        pageTitle: 'Edit Contact',
+                        contact: result,
+                        userN: user.username
+                    });
+                })
+                .catch( err => {
+                    console.log(err);
+                    res.redirect(`/mainmenu/${user.username}`);
+                });
+
+});// ******************** This is OK **************************
 
 // '/mainmenu/:user/edit-contact/:idEdit' => 'POST'
 router.post('/mainmenu/:user/edit-contact/:idEdit', [
@@ -130,13 +139,23 @@ router.post('/mainmenu/:user/edit-contact/:idEdit', [
     
     const errors = validationResult(req); 
     const { nameC, lastName, birthday, phoneNumber, email } = req.body;
-    const id = req.params.idEdit;
+    const idContact = req.params.idEdit;
     const userFrom = req.params.user;
 
     if(!errors.isEmpty()){
         console.log(errors);
     } else {
-        const editedCorrect = await contactRepo.modify(id, userFrom, nameC, lastName, birthday, phoneNumber, email);
+        //const editedCorrect = await contactRepo.modify(id, userFrom, nameC, lastName, birthday, phoneNumber, email);
+        let userUp = await Contact.findOne({ where: { id: idContact }});
+        userUp = {
+            username: nameC,
+            lastName: lastName,
+            birthday: birthday,
+            phoneNumber: phoneNumber,
+            email: email
+        };
+        await userUp.save();//********** save no es una funcion ******** */
+        console.log(userUp);
         res.redirect(`/mainmenu/${userFrom}/contacts`);
     }
 });

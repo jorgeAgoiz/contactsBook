@@ -52,20 +52,20 @@
                                 <p> <%= element.email %></p>
                             </div>
                             <div class="col-2">
-                                <form action="/mainmenu/<%= element.userFrom %>/edit-contact/<%= element.id %>" method="GET">
+                                <form action="/mainmenu/<%= element.userId %>/edit-contact/<%= element.id %>" method="GET">
                                     <button type="submit" class="editBtn btn btn-primary btn-block">Edit</button>
                                 </form>
                             </div>
                             <div class="col-5 contactBirthday text-center pt-1 pb-1 pr-1 pl-1">
                                 <h2><u>Birthday:</u></h2>
-                                <p> <%= element.birthday %> </p>
+                                <p> <%= element.birthday.toLocaleDateString() %> </p>
                             </div>
                             <div class="col-5 contactNumber text-center pt-1 pb-1 pr-1 pl-1">
                                 <h2><u>Telephone number:</u></h2>
                                 <p> <%= element.phoneNumber %></p>
                             </div>
                             <div class="col-2">
-                                <form action="/mainmenu/<%= element.userFrom %>/delete-contact" method="POST">
+                                <form action="/mainmenu/<%= element.userId %>/delete-contact" method="POST">
                                     <input type="hidden" value="<%= element.id %>" name="idDelete" id="idDelete">
                                     <button type="submit" class="deleteBtn btn btn-primary btn-block">Delete</button>
                                 </form>  
