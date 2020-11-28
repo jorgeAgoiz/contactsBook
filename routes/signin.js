@@ -42,7 +42,6 @@ router.post('/signin', [
         const theUser = await User.findOne({where: { username: uName }})
                             .then( user => {
                                 console.log('USER FOUND');
-                                console.log(user);
                                 return user;
                             })
                             .catch( err => {
@@ -52,6 +51,7 @@ router.post('/signin', [
         const [hashed, salt] = theUser.password.split('.');
         const hashedSuppliedBuf = await scrypt(pass, salt, 64);
         if (hashed === hashedSuppliedBuf.toString('hex')){
+            req.session.userId = theUser.id;
             res.redirect(`/mainmenu/${theUser.username}`);
             console.log('Correct validation');
         } else {

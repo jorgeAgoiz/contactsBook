@@ -20,6 +20,11 @@ router.get('/mainmenu/:user', async (req, res, next) => {
             });
 });
 
+router.get('/signout', (req, res, next) => {
+    req.session = null;
+    res.redirect('/');
+});
+
 /* Implementemos los metodos del menu principal */
 
 module.exports = {

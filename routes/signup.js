@@ -46,7 +46,7 @@ router.post('/signup', [// SEQUELIZE IMPLEMENTED
                 password: `${buf.toString('hex')}.${salt}`
                 })
                 .then( result => {
-                    console.log(result);
+                    req.session.userId = result.id;
                     res.redirect(`/mainmenu/${inputUser}`);   
                 })
                 .catch( err => {

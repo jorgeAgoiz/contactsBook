@@ -1,6 +1,7 @@
 //Packages
 const path = require('path');
 const bodyParser = require('body-parser');
+const cookieSession = require('cookie-session');
 
 const express = require('express');
 const app = express();//Instance of express server
@@ -18,6 +19,9 @@ app.set('views', 'views');// Where can we found the views files
 //Middlewares
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(cookieSession({
+    keys: ['ashoqp710p290a']
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(signupRouter);
 app.use(signinRouter);
