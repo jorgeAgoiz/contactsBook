@@ -40,9 +40,8 @@ module.exports = {
         .normalizeEmail()
         .withMessage('Must be a valid email'),
     requireValidDate: body('birthday')
-        .trim(),
-        //.isDate({format: 'YYYY/MM/DD', delimiters: ['/', '-']})
-        //.withMessage('Must be a valid date'),
+        .trim()
+        .toDate(),
     requireValidName: body('nameC')
         .trim()
         .notEmpty()

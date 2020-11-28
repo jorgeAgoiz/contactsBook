@@ -144,25 +144,26 @@ router.post('/mainmenu/:user/edit-contact/:idEdit', [
 
     if(!errors.isEmpty()){
         console.log(errors);
+        res.redirect(`/mainmenu/${result.userId}/edit-contact/${idContact}`);
     } else {
-        //const editedCorrect = await contactRepo.modify(id, userFrom, nameC, lastName, birthday, phoneNumber, email);
-        let userUp = await Contact.findOne({ where: { id: idContact }});
-        userUp = {
-            username: nameC,
-            lastName: lastName,
-            birthday: birthday,
-            phoneNumber: phoneNumber,
-            email: email
-        };
-        await userUp.save();//********** save no es una funcion ******** */
-        console.log(userUp);
-        res.redirect(`/mainmenu/${userFrom}/contacts`);
+        let userUp = await Contact.findOne({ where: { id: idContact }})
+                                .then( result => {
+                                    result.name = nameC;
+                                    result.lastName = lastName;
+                                    result.birthday = birthday;
+                                    result.phoneNumber = phoneNumber;
+                                    result.email = email;
+
+                                    result.save();
+                                    res.redirect(`/mainmenu/${result.userId}/contacts/${userFrom}`);
+                                    return result;
+                                })
+                                .catch( err => {
+                                    console.log(err);
+                                    res.redirect(`/mainmenu/${result.userId}/edit-contact/${idContact}`);
+                                });
     }
-});
-
-/* Retocar la interfaz de la app y añadir sessions al loggeo
-*/
-
+});// ************* This is OK ******************
 
 
 module.exports = {
