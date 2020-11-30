@@ -4,10 +4,12 @@ const { body, validationResult } = require('express-validator');
 const express = require('express');
 const router = express.Router();
 const rootDir = require('../util/path');
-const contactRepo = require('../repositories/contactsRepo');
+// ***** MODELS REPOSITORIES
 const Contact = require('../repositories/contacts');
 const User = require('../repositories/users');
+//const contactRepo = require('../repositories/contactsRepo');
 
+// IMPORT THE VALIDATORS
 const { 
     requireValidEmail, 
     requireValidDate, 
@@ -22,8 +24,6 @@ router.get('/mainmenu/:userId/contacts/:user', async (req, res, next) => {
 
     await Contact.findAll({ where: { userId: userC }})
                 .then( results => {
-                    console.log(results);
-
                     res.render('myContacts.ejs', {
                         contacts: results,
                         pageTitle: "My Contacts",
@@ -35,7 +35,7 @@ router.get('/mainmenu/:userId/contacts/:user', async (req, res, next) => {
                     console.log(err);
                     res.redirect(`/mainmenu/${userN}`);
                 });
-});// ********************* This is OK ********************
+});
 
 // '/mainmenu/:user/delete-contact' => POST
 router.post('/mainmenu/:userId/delete-contact', async (req, res, next) => {
@@ -48,17 +48,15 @@ router.post('/mainmenu/:userId/delete-contact', async (req, res, next) => {
     await cont.destroy();
 
     res.redirect(`/mainmenu/${userMenu}/contacts/${user.username}`);//********* Check modal in bootstrap framework
-});//************************** This is OK ***************** */
+});
 
 
 // '/mainmenu/:user/add-contact' => GET
 router.get('/mainmenu/:user/add-contact', async (req, res, next) => {
-
     const userName = req.params.user;
 
     await User.findOne({ where: { username: userName }})
             .then( result => {
-                console.log(result); 
                 res.render('addContact.ejs', {
                     userId: result.id,
                     pageTitle: "Add A Contact",
@@ -69,7 +67,7 @@ router.get('/mainmenu/:user/add-contact', async (req, res, next) => {
                 console.log(err);
                 res.redirect(`/mainmenu/${userName}`);
             });    
-});// *********************** This is OK *****************************
+});
 
 // '/mainmenu/add-contact' => POST
 router.post('/mainmenu/add-contact', [
@@ -77,7 +75,7 @@ router.post('/mainmenu/add-contact', [
     requireValidDate, 
     requireValidName, 
     requireValidLastName
-], async (req, res, next) => {
+    ], async (req, res, next) => {
 
     const errors = validationResult(req);
     const { nameC, lastName, birthday, phoneNumber, email, userId, userName } = req.body;
@@ -103,19 +101,16 @@ router.post('/mainmenu/add-contact', [
         });
     }
     
-});// *************** This i OK **********************
+});
 
 // '/mainmenu/:user/edit-contact/:idEdit' => 'GET'
-router.get('/mainmenu/:userId/edit-contact/:idEdit', async (req, res, next) => {
-    
+router.get('/mainmenu/:userId/edit-contact/:idEdit', async (req, res, next) => {  
     const idContact = req.params.idEdit; 
     const userId = req.params.userId;
-
     const user = await User.findOne({ where: { id: userId }});
     
     await Contact.findOne({ where: { id: idContact }})
                 .then( result => {
-
                     res.render('editContact.ejs', {
                         pageTitle: 'Edit Contact',
                         contact: result,
@@ -126,8 +121,7 @@ router.get('/mainmenu/:userId/edit-contact/:idEdit', async (req, res, next) => {
                     console.log(err);
                     res.redirect(`/mainmenu/${user.username}`);
                 });
-
-});// ******************** This is OK **************************
+});
 
 // '/mainmenu/:user/edit-contact/:idEdit' => 'POST'
 router.post('/mainmenu/:user/edit-contact/:idEdit', [
@@ -135,7 +129,7 @@ router.post('/mainmenu/:user/edit-contact/:idEdit', [
     requireValidDate, 
     requireValidName, 
     requireValidLastName
-], async (req, res, next) => {
+    ], async (req, res, next) => {
     
     const errors = validationResult(req); 
     const { nameC, lastName, birthday, phoneNumber, email } = req.body;
@@ -162,9 +156,8 @@ router.post('/mainmenu/:user/edit-contact/:idEdit', [
                                     console.log(err);
                                     res.redirect(`/mainmenu/${result.userId}/edit-contact/${idContact}`);
                                 });
-    }
-});// ************* This is OK ******************
-
+    };
+});
 
 module.exports = {
     contactsRouter: router

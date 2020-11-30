@@ -2,6 +2,7 @@ const { body } = require('express-validator');
 const User = require('../repositories/users');
 
 module.exports = {
+    /* ***************** SIGN UP VALIDATORS ***************** */
     requireValidUser: body('inputUser')//Validator Sign Up
         .trim()
         .notEmpty()
@@ -20,12 +21,13 @@ module.exports = {
         .trim()
         .isLength({min: 5, max: 20})
         .withMessage('Must be between 5 and 20 characters')
-        .custom((password2, { req }) => {
+        .custom((password2, { req }) => {//To check password and password confirmation are equals
             if(password2 !== req.body.password1){
                 throw new Error('Passwords must match.');   
             }
             return true;
         }),
+        /* ***************** SIGN IN VALIDATORS ***************** */
     requireValidPasswordForUser: body('password1')//Validator Sign In
         .trim()
         .notEmpty()
@@ -34,6 +36,7 @@ module.exports = {
         .trim()
         .notEmpty()
         .withMessage('Must provide a valid user.'),
+        /* ***************** EDIT CONTACT VALIDATORS ***************** */
     requireValidEmail: body('email')//Add and Edit Contact Validator
         .trim()
         .isEmail()

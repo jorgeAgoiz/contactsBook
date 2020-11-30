@@ -3,8 +3,10 @@ const path = require('path');
 const express = require('express');
 const router = express.Router();
 const rootDir = require('../util/path');
+// MODEL REPOSITORY
 const User = require('../repositories/users');
 
+// '/mainmenu/:user' => GET
 router.get('/mainmenu/:user', async (req, res, next) => {
     await User.findOne({ where: { username: req.params.user }})
             .then( result => {
@@ -20,12 +22,11 @@ router.get('/mainmenu/:user', async (req, res, next) => {
             });
 });
 
+// '/signout' => GET
 router.get('/signout', (req, res, next) => {
     req.session = null;
     res.redirect('/');
 });
-
-/* Implementemos los metodos del menu principal */
 
 module.exports = {
     menuRouter: router

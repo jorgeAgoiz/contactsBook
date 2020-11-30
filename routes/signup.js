@@ -8,25 +8,27 @@ const util = require('util');
 //To convert this callback function in a promise function with util.promisify
 const scrypt = util.promisify(crypto.scrypt);
 
+// VALIDATORS
 const {
     requireValidUser,
     requireValidPassword,
     requirePasswordConfirmation
 } = require('./validators');
-
-const repo = require('../repositories/usersRepo');//************************************************************ */
-const User = require('../repositories/users');
 const { body, validationResult } = require('express-validator');
+
+// MODEL REPOSITORY
+const User = require('../repositories/users');
+//const repo = require('../repositories/usersRepo');
 
 // '/signup' => GET
 router.get('/signup', (req, res, next) => {
     res.render('signup.ejs', {
         pageTitle: 'Contacts Book - Sign Up'
     });
-    //res.sendFile(path.join(rootDir,'views', 'signup.html'));
 });
+
 // '/signup' => POST
-router.post('/signup', [// SEQUELIZE IMPLEMENTED
+router.post('/signup', [
     requireValidUser,
     requireValidPassword,
     requirePasswordConfirmation
