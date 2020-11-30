@@ -2,11 +2,9 @@
 const path = require('path');
 const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
-
 const express = require('express');
 const app = express();//Instance of express server
 const sequelize = require('./util/database');
-
 const { signupRouter } = require('./routes/signup');
 const { signinRouter } = require('./routes/signin');
 const { menuRouter } = require('./routes/mainmenu');
@@ -23,6 +21,7 @@ app.use(cookieSession({
     keys: ['ashoqp710p290a']
 }));
 app.use(express.static(path.join(__dirname, 'public')));
+// ROUTES
 app.use(signupRouter);
 app.use(signinRouter);
 app.use(menuRouter);
@@ -33,13 +32,12 @@ app.get('/', (req, res, next) => {
     res.render('main.ejs', {
         pageTitle: 'Contacts Book'
     });
-    //res.sendFile('/views/main.html', { root : __dirname});
 });
 
 sequelize
     .sync()
     .then( result => {
-        //console.log(result);
+        //Listen in port 3000
         app.listen(3000, () => {
             console.log('Listening in port 3000...');
         });
@@ -48,4 +46,4 @@ sequelize
         console.log(err);
     });
 
-//Listen in port 3000
+
