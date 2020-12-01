@@ -10,6 +10,12 @@ const { signinRouter } = require('./routes/signin');
 const { menuRouter } = require('./routes/mainmenu');
 const { contactsRouter } = require('./routes/contacts');
 
+// MODELS
+const User = require('./repositories/users');
+const Contact = require('./repositories/contacts');
+// DEFINE THE RELATIONS BETTWEN TABLES ****************************************
+User.hasMany(Contact, {foreignKey: 'userId', sourceKey: 'id'});
+
 // EJ6 TEMPLATE ENGINE
 app.set('view engine', 'ejs');// Setting our default template engine
 app.set('views', 'views');// Where can we found the views files
@@ -35,6 +41,7 @@ app.get('/', (req, res, next) => {
 });
 
 sequelize
+    //.sync( { force: true })
     .sync()
     .then( result => {
         //Listen in port 3000
@@ -46,4 +53,10 @@ sequelize
         console.log(err);
     });
 
-
+/* Things to do yet:
+    - show the form errors in the input field.
+    - add the modal bootstrap style to confirm delete and edit contact.
+    - add a cancel button in edit contact page
+    - research about the posibility of introduce maps API to show the contact location.
+    - learn more about sequelize library because are very deep and interesting.
+ */

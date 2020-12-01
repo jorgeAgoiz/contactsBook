@@ -1,6 +1,5 @@
 //PACKAGES AND MODELS
 const Sequelize = require('sequelize');
-const User = require('./users');
 const sequelize = require('../util/database');
 
 // IMPLEMENT THE SEQUELIZE SCHEMA
