@@ -52,11 +52,3 @@ sequelize
     .catch( err => {
         console.log(err);
     });
-
-/* Things to do yet:
-    - show the form errors in the input field.
-    - add the modal bootstrap style to confirm delete and edit contact.
-    - add a cancel button in edit contact page
-    - research about the posibility of introduce maps API to show the contact location.
-    - learn more about sequelize library because are very deep and interesting.
- */

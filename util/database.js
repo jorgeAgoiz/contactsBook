@@ -1,9 +1,13 @@
 // Database and connector setup
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('contactsbook', 'root', 'nodecomplete2020', {
+/* *************** HERE YOUR DATABASE ARGUMENTS ************* */
+
+//                               db.name    |   db.user   |   db.password
+const sequelize = new Sequelize('YOUR DB NAME', 'YOUR USER', 'YOUR PASSWORD', {
     dialect: 'mysql',// Database language
-    host: 'localhost'
+    host: 'localhost'// Your host
 });
+/* *************** HERE YOUR DATABASE ARGUMENTS ************* */
 
 module.exports = sequelize;
