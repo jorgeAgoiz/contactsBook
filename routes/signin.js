@@ -30,34 +30,34 @@ router.get('/signin', (req, res, next) => {
 router.post('/signin', [
     requireValidPasswordForUser,
     requireValidUserName
-    ], async (req, res, next) => {
-    
+], async (req, res, next) => {
+
     const errors = validationResult(req);
     const uName = req.body.inputUser;
     const pass = req.body.password1;
 
-    if(!errors.isEmpty()){
+    if (!errors.isEmpty()) {
         console.log(errors);
         res.redirect('/signin');
     } else {
-        const theUser = await User.findOne({where: { username: uName }})
-                            .then( user => {
-                                return user;
-                            })
-                            .catch( err => {
-                                console.log(err);
-                            });
+        const theUser = await User.findOne({ where: { username: uName } })
+            .then(user => {
+                return user;
+            })
+            .catch(err => {
+                console.log(err);
+            });
         /* TO ENCRYPT THE PASSWORD AND COMPARE WITH THE DB PASSWORD */
         const [hashed, salt] = theUser.password.split('.');
         const hashedSuppliedBuf = await scrypt(pass, salt, 64);
-        if (hashed === hashedSuppliedBuf.toString('hex')){
+        if (hashed === hashedSuppliedBuf.toString('hex')) {
             req.session.userId = theUser.id;
             res.redirect(`/mainmenu/${theUser.username}`);
         } else {
             res.redirect('/signin');
             console.log('User not found');
         }
-    };          
+    };
 });
 
 module.exports = {

@@ -1,105 +1,120 @@
 body {
-    background-image: url("https://s2.best-wallpaper.net/wallpaper/5120x2880/1903/Orange-stripe-background-abstract_5120x2880.jpg");
-    background-size: cover;
-    background-attachment: fixed;
+  background-color: rgb(134, 134, 134);
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 /* MAIN PAGE */
 
 .navBar {
-    background-color: rgba(172, 241, 241, 0.6);
-    padding-top: 1em;
-    padding-bottom: 1em;
+  background-color: rgba(193, 252, 252, 0.6);
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
 
 .linkText {
-    font-family: 'Anton', sans-serif;
-    font-size: calc(1.5em + 1vw);
-    color: black;
+  font-family: "Anton", sans-serif;
+  font-size: calc(1.5em + 1vw);
+  color: black;
 }
 
 .titleApp {
-    height: 500px;
+  height: 500px;
+  color: ghostwhite;
 }
 
 .textH1 {
-    color: rgb(255, 236, 208);
-    font-family: 'Anton', sans-serif;
-    font-size: calc(4em + 3vw);
-    -webkit-text-stroke: 2px black;
+  color: rgb(255, 236, 208);
+  font-family: "Anton", sans-serif;
+  font-size: calc(4em + 3vw);
+  -webkit-text-stroke: 2px black;
 }
 
 /* SIGN IN PAGE */
 
 .labelForm {
-    font-family: 'Bree Serif', serif;
-    font-size: calc(1em + 1vw);
-    color: black;
+  font-family: "Bree Serif", serif;
+  font-size: calc(1em + 1vw);
+  color: black;
 }
 
 /* MAIN MENU PAGE */
 
 .btnMenu {
-    background-color: rgba(50, 209, 209, 0.8);
-    border-radius: 10px;
-    font-family: 'Anton', sans-serif;
-    font-size: calc(1em + 1vw);
+  background-color: rgba(50, 209, 209, 0.8);
+  border-radius: 10px;
+  font-family: "Anton", sans-serif;
+  font-size: calc(1em + 1vw);
 }
 
-.userText h1{
-    font-family: 'Anton', sans-serif;
-    font-size: calc(1.8em + 1.3vw);
+.userText h1 {
+  font-family: "Anton", sans-serif;
+  font-size: calc(1.8em + 1.3vw);
 }
 
 /* CONTACTS LIST */
 
 .deleteBtn {
-    background-color: rgba(50, 209, 209, 0.8);
-    color: black;
+  background-color: rgb(248, 61, 61);
+  color: black;
+  font-size: calc(0.5em + 0.5vw);
 }
 
 .editBtn {
-    background-color: rgba(50, 209, 209, 0.8);
-    color: black;
+  background-color: rgba(50, 209, 209, 1);
+  color: black;
+  font-size: calc(0.5em + 0.5vw);
 }
 
 .contactCard {
-    background-color: rgba(207, 239, 247, 0.7);
-    border-radius: 12px;
-    border: 2px solid black;
-    margin-top: 15px;
+  background-color: rgba(250, 250, 250, 0.8);
+  border-radius: 12px;
+  border: 3px solid rgb(0, 0, 0);
+  margin-top: 15px;
+  color: black;
 }
 
 .contactName {
-    font-family: 'Goldman', cursive;
-    font-size: calc(0.6em + 0.8vw);
-    background-color: rgba(146, 227, 241, 0.7);
-    border-radius: 12px;
-    border: 1px solid black;
+  font-family: "Goldman", cursive;
+  font-size: calc(0.6em + 0.8vw);
+  background-color: rgba(121, 229, 248, 1);
+  border-radius: 12px;
 }
 
 .contactBirthday {
-    font-family: 'Goldman', cursive;
-    font-size: calc(0.6em + 0.8vw);
+  font-family: "Goldman", cursive;
+  font-size: calc(0.5em + 0.8vw);
+}
+
+.contactBirthday h2 {
+  font-size: calc(0.7em + 0.9vw);
 }
 
 .contactEmail {
-    font-family: 'Goldman', cursive;
-    font-size: calc(0.6em + 0.8vw);
+  font-family: "Goldman", cursive;
+  font-size: calc(0.5em + 0.8vw);
+}
+
+.contactEmail h2 {
+  font-size: calc(0.7em + 0.9vw);
 }
 
 .contactNumber {
-    font-family: 'Goldman', cursive;
-    font-size: calc(0.6em + 0.8vw);
+  font-family: "Goldman", cursive;
+  font-size: calc(0.5em + 0.8vw);
+}
+
+.contactNumber h2 {
+  font-size: calc(0.7em + 0.9vw);
 }
 
 /* EDIT FORM PAGE*/
 
 .editFormBtn {
-    background-color: rgba(50, 209, 209, 0.8);
-    color: black;
+  background-color: rgba(50, 209, 209, 0.8);
+  color: black;
 }
 
 .labelForm {
-    font-size: calc(0.7em + 0.9vw);
+  font-size: calc(0.7em + 0.9vw);
 }
