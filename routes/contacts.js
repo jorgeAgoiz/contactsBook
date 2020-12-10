@@ -148,9 +148,10 @@ router.post('/mainmenu/:user/edit-contact/:idEdit', [
                                     result.phoneNumber = phoneNumber;
                                     result.email = email;
 
-                                    result.save();
+                                    return result.save();
+                                })
+                                .then(result => {
                                     res.redirect(`/mainmenu/${result.userId}/contacts/${userFrom}`);
-                                    return result;
                                 })
                                 .catch( err => {
                                     console.log(err);

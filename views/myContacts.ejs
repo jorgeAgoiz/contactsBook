@@ -43,28 +43,28 @@
                 <% for ( let element of contacts ) { %>
                     <div class="col-12 col-sm-10 col-md-8 contactCard">
                         <div class="row align-items-center justify-content-center">
-                            <div class="col-12 col-sm-8 col-md-5 contactName text-center pt-1 pb-1 pr-1 pl-1">
+                            <div class="col-12 col-sm-10 col-md-5 contactName text-center pt-1 pb-1 pr-1 pl-1 order-1 order-sm-1 order-md-1">
                                 <h1> <%= element.name %> </h1>
                                 <h2> <%= element.lastName %> </h2>  
                             </div>
-                            <div class="col-5 contactEmail text-center pt-1 pb-1 pr-1 pl-1">
+                            <div class="col-4 col-sm-4 col-md-5 contactEmail text-center pt-1 pb-1 pr-1 pl-1 order-2 order-sm-2 order-md-2">
                                 <h2><u>Email:</u></h2>
                                 <p> <%= element.email %></p>
                             </div>
-                            <div class="col-2">
+                            <div class="col-6 col-sm-6 col-md-2 order-5 order-sm-5 order-md-3 mb-1">
                                 <form action="/mainmenu/<%= element.userId %>/edit-contact/<%= element.id %>" method="GET">
                                     <button type="submit" class="editBtn btn btn-primary btn-block">Edit</button>
                                 </form>
                             </div>
-                            <div class="col-5 contactBirthday text-center pt-1 pb-1 pr-1 pl-1">
+                            <div class="col-4 col-sm-4 col-md-5 contactBirthday text-center pt-1 pb-1 pr-1 pl-1 order-3 order-sm-3 order-md-4">
                                 <h2><u>Birthday:</u></h2>
-                                <p> <%= element.birthday.getDay() %> / <%= element.birthday.getMonth() %> / <%= element.birthday.getFullYear() %></p>
+                                <p> <%= element.birthday %> </p>
                             </div>
-                            <div class="col-5 contactNumber text-center pt-1 pb-1 pr-1 pl-1">
+                            <div class="col-4 col-sm-4 col-md-5 contactNumber text-center pt-1 pb-1 pr-1 pl-1 order-4 order-sm-4 order-md-5">
                                 <h2><u>Telephone number:</u></h2>
                                 <p> <%= element.phoneNumber %></p>
                             </div>
-                            <div class="col-2">
+                            <div class="col-6 col-sm-6 col-md-2 order-6 order-sm-6 order-md-6 mb-1">
                                 <form action="/mainmenu/<%= element.userId %>/delete-contact" method="POST">
                                     <input type="hidden" value="<%= element.id %>" name="idDelete" id="idDelete">
                                     <button type="submit" class="deleteBtn btn btn-primary btn-block">Delete</button>

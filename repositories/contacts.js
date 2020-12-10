@@ -23,7 +23,7 @@ const Contact = sequelize.define('contacts', {
         allowNull: true
     },
     birthday: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY,
         allowNull: true
     },
     phoneNumber: {

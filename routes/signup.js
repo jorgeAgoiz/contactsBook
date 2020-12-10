@@ -23,7 +23,8 @@ const User = require('../repositories/users');
 // '/signup' => GET
 router.get('/signup', (req, res, next) => {
     res.render('signup.ejs', {
-        pageTitle: 'Contacts Book - Sign Up'
+        pageTitle: 'Contacts Book - Sign Up', 
+        errors: null
     });
 });
 
@@ -42,6 +43,7 @@ router.post('/signup', [
         
         if (!errors.isEmpty()) {       
             console.log(errors);
+            res.redirect('/signup');
         }else {
             User.create({
                 username: inputUser,
