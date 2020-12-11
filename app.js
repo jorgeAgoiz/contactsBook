@@ -14,7 +14,7 @@ const { contactsRouter } = require('./routes/contacts');
 const User = require('./repositories/users');
 const Contact = require('./repositories/contacts');
 // DEFINE THE RELATIONS BETTWEN TABLES ****************************************
-User.hasMany(Contact, {foreignKey: 'userId', sourceKey: 'id'});
+User.hasMany(Contact, { foreignKey: 'userId', sourceKey: 'id' });
 
 // EJ6 TEMPLATE ENGINE
 app.set('view engine', 'ejs');// Setting our default template engine
@@ -22,7 +22,7 @@ app.set('views', 'views');// Where can we found the views files
 
 //Middlewares
 app.use(express.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieSession({
     keys: ['ashoqp710p290a']
 }));
@@ -41,14 +41,14 @@ app.get('/', (req, res, next) => {
 });
 
 sequelize
-    //.sync( { force: true })
+    //.sync({ force: true })
     .sync()
-    .then( result => {
+    .then(result => {
         //Listen in port 3000
         app.listen(3000, () => {
             console.log('Listening in port 3000...');
         });
     })
-    .catch( err => {
+    .catch(err => {
         console.log(err);
     });
